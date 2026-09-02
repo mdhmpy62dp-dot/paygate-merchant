@@ -79,13 +79,77 @@ function Balance({hidden,setHidden}){
 }
 
 function Payments({toast}) {
- return <section className="card"><div className="section-head"><h2>收款方式</h2><button className="link" onClick={()=>toast('打开收款方式管理')}>管理收款方式 ›</button></div>
-   <div className="payment-grid">
-    <Pay icon="微" tone="wechat" name="微信支付" toast={toast}/><Pay icon="支" tone="alipay" name="支付宝" toast={toast}/><Pay icon="▤" tone="bank" name="银行卡收款" toast={toast}/>
+ return <section className="card">
+
+   <div className="section-head">
+     <h2>收款方式</h2>
+     <button
+       className="link"
+       onClick={()=>toast('打开收款方式管理')}
+     >
+       管理收款方式 ›
+     </button>
    </div>
+
+   <div className="payment-grid">
+
+     <Pay
+       icon="微"
+       tone="wechat"
+       name="微信支付"
+       desc="扫码 / API"
+       toast={toast}
+     />
+
+     <Pay
+       icon="支"
+       tone="alipay"
+       name="支付宝"
+       desc="扫码 / API"
+       toast={toast}
+     />
+
+     <Pay
+       icon="▤"
+       tone="bank"
+       name="银行卡"
+       desc="银行卡转账"
+       toast={toast}
+     />
+
+     <Pay
+       icon="₮"
+       tone="usdt"
+       name="USDT"
+       desc="TRC20"
+       toast={toast}
+     />
+
+   </div>
+
  </section>
 }
-function Pay({icon,tone,name,toast}){return <button className="pay" onClick={()=>toast(name)}><span className={'pay-logo '+tone}>{icon}</span><strong>{name}</strong><em>已开启</em></button>}
+
+function Pay({icon,tone,name,desc,toast}){
+ return <button
+   className="pay"
+   onClick={()=>toast(name)}
+ >
+
+   <span className={'pay-logo '+tone}>
+     {icon}
+   </span>
+
+   <strong>{name}</strong>
+
+   <small className="pay-desc">
+     {desc}
+   </small>
+
+   <em>已开启</em>
+
+ </button>
+}
 
 function Chart(){
  const [period,setPeriod]=useState('7天')
