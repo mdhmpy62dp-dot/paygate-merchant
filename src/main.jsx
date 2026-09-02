@@ -206,7 +206,7 @@ function App(){
  if(detail) return <div className="app"><OrderDetail order={detail} back={()=>setDetail(null)}/>{toastMsg&&<div className="toast">{toastMsg}</div>}</div>
  const page = tab==='home'?<><Header toast={toast}/><main><Balance hidden={hidden} setHidden={setHidden}/><Payments toast={toast}/><Chart/><Orders openOrder={setDetail}/><Quick toast={toast}/></main></>:
   tab==='orders'?<><Header toast={toast}/><main><OrdersPage openOrder={setDetail}/></main></>:
-  tab===tab==='wallet'?<><Header toast={toast}/><main><WalletPage toast={toast}/></main></>:
+  tab==='wallet'?<><Header toast={toast}/><main><WalletPage toast={toast}/></main></>:
   tab==='settlement'?<><Header toast={toast}/><main><Placeholder title="结算" desc="待结算、自动结算和历史结算。"/></main></>:
   <><Header toast={toast}/><main><Placeholder title="我的" desc="商户资料、安全设置、收款方式和 API 管理。"/></main></>
  return <div className="app">{page}<nav className="bottom">{[['home','⌂','首页'],['orders','▣','订单'],['wallet','▱','钱包'],['settlement','⇄','结算'],['me','♙','我的']].map(x=><button className={tab===x[0]?'active':''} onClick={()=>nav(x[0])} key={x[0]}><span>{x[1]}</span><b>{x[2]}</b></button>)}</nav>{toastMsg&&<div className="toast">{toastMsg}</div>}</div>
