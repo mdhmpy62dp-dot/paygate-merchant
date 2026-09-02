@@ -88,16 +88,138 @@ function Payments({toast}) {
 function Pay({icon,tone,name,toast}){return <button className="pay" onClick={()=>toast(name)}><span className={'pay-logo '+tone}>{icon}</span><strong>{name}</strong><em>已开启</em></button>}
 
 function Chart(){
- return <section className="card chart-card"><div className="section-head"><h2>收入趋势（近7天）</h2><button className="period" onClick={()=>alert('近7天')}>近7天⌄</button></div>
-   <div className="chart-wrap"><div className="y-axis"><span>4,000</span><span>3,000</span><span>2,000</span><span>1,000</span><span>0</span></div>
-    <div className="chart"><div className="grid">{[1,2,3,4,5].map(i=><i key={i}/>)}</div>
-     <svg viewBox="0 0 700 220" preserveAspectRatio="none"><defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#2879f5" stopOpacity=".22"/><stop offset="1" stopColor="#2879f5" stopOpacity=".02"/></linearGradient></defs>
-      <path d="M15 188L126 145L237 94L348 136L459 62L570 112L685 28L685 205L15 205Z" fill="url(#fill)"/>
-      <polyline points="15,188 126,145 237,94 348,136 459,62 570,112 685,28" fill="none" stroke="#2879f5" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-      {[['15','188'],['126','145'],['237','94'],['348','136'],['459','62'],['570','112'],['685','28']].map(([cx,cy])=><circle key={cx} cx={cx} cy={cy} r="5" fill="#fff" stroke="#2879f5" strokeWidth="3"/>)}
-     </svg>
-    </div>
-   </div><div className="dates">{['05-07','05-08','05-09','05-10','05-11','05-12','05-13'].map(x=><span key={x}>{x}</span>)}</div>
+ const [period,setPeriod]=useState('7天')
+
+ const data={
+   '7天':{
+     values:[1850,2450,3100,2700,3650,2950,3980],
+     dates:['08-27','08-28','08-29','08-30','08-31','09-01','09-02']
+   },
+   '30天':{
+     values:[2100,2800,2450,3300,2900,3600,3980],
+     dates:['08-04','08-09','08-14','08-19','08-24','08-29','09-02']
+   },
+   '90天':{
+     values:[1800,2350,2100,2900,2650,3400,3980],
+     dates:['06-04','06-19','07-04','07-19','08-03','08-18','09-02']
+   }
+ }
+
+ const current=data[period]
+ const max=4000
+
+ const points=current.values.map((v,i)=>{
+   const x=15+(670/6)*i
+   const y=205-(v/max)*177
+   return [x,y]
+ })
+
+ const line=points.map(p=>p.join(',')).join(' ')
+ const area=`M${points[0][0]} ${points[0][1]} L${points.slice(1).map(p=>`${p[0]} ${p[1]}`).join(' L')} L685 205 L15 205 Z`
+
+ return <section className="card chart-card">
+
+   <div className="section-head">
+     <h2>收入趋势</h2>
+
+     <div style={{display:'flex',gap:'4px'}}>
+       {['7天','30天','90天'].map(x=>
+         <button
+           key={x}
+           className="period"
+           onClick={()=>setPeriod(x)}
+           style={{
+             background:period===x?'#eaf2ff':'#f5f7fa',
+             color:period===x?'#1769ee':'#4d5a6c',
+             fontWeight:period===x?'600':'400'
+           }}
+         >
+           {x}
+         </button>
+       )}
+     </div>
+   </div>
+
+   <div className="chart-wrap">
+
+     <div className="y-axis">
+       <span>4,000</span>
+       <span>3,000</span>
+       <span>2,000</span>
+       <span>1,000</span>
+       <span>0</span>
+     </div>
+
+     <div className="chart">
+
+       <div className="grid">
+         {[1,2,3,4,5].map(i=><i key={i}/>)}
+       </div>
+
+       <svg
+         viewBox="0 0 700 220"
+         preserveAspectRatio="none"
+       >
+
+         <defs>
+           <linearGradient
+             id="incomeFill"
+             x1="0"
+             y1="0"
+             x2="0"
+             y2="1"
+           >
+             <stop
+               offset="0"
+               stopColor="#2879f5"
+               stopOpacity=".22"
+             />
+
+             <stop
+               offset="1"
+               stopColor="#2879f5"
+               stopOpacity=".02"
+             />
+           </linearGradient>
+         </defs>
+
+         <path
+           d={area}
+           fill="url(#incomeFill)"
+         />
+
+         <polyline
+           points={line}
+           fill="none"
+           stroke="#2879f5"
+           strokeWidth="4"
+           strokeLinecap="round"
+           strokeLinejoin="round"
+         />
+
+         {points.map(([cx,cy],i)=>
+           <circle
+             key={i}
+             cx={cx}
+             cy={cy}
+             r="5"
+             fill="#fff"
+             stroke="#2879f5"
+             strokeWidth="3"
+           />
+         )}
+
+       </svg>
+
+     </div>
+   </div>
+
+   <div className="dates">
+     {current.dates.map(x=>
+       <span key={x}>{x}</span>
+     )}
+   </div>
+
  </section>
 }
 
