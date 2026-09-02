@@ -531,3 +531,82 @@
     font-size:10px;
   }
 }
+/* ===== 收款方式 V2 ===== */
+
+.payment-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.pay{
+  min-height:126px;
+  border:1px solid #e7ebf1;
+  border-radius:14px;
+  background:#fff;
+  padding:13px 8px 11px;
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+  box-shadow:0 4px 12px rgba(30,54,86,.035);
+}
+
+.pay-logo{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-weight:800;
+  font-size:18px;
+}
+
+.pay strong{
+  font-size:12px;
+  color:#26334a;
+  white-space:nowrap;
+}
+
+.pay-desc{
+  color:#8d98a8;
+  font-size:9px;
+  font-style:normal;
+}
+
+.pay em{
+  font-style:normal;
+  font-size:9px;
+  color:#19a95b;
+  background:#eaf9f0;
+  border-radius:6px;
+  padding:3px 7px;
+}
+
+.pay-logo.wechat{
+  background:#1db954;
+}
+
+.pay-logo.alipay{
+  background:#1677ff;
+}
+
+.pay-logo.bank{
+  background:#f79519;
+}
+
+.pay-logo.usdt{
+  background:#26a17b;
+}
+
+@media(max-width:360px){
+  .pay{
+    min-height:120px;
+  }
+
+  .pay strong{
+    font-size:11px;
+  }
+}
