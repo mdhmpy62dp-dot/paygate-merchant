@@ -575,7 +575,30 @@
   font-size:9px;
   font-style:normal;
 }
+/* ===== 余额卡片今日订单 ===== */
 
+.balance-orders{
+  margin-top:14px;
+  padding-top:13px;
+  border-top:1px solid rgba(255,255,255,.25);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:#dceaff;
+  font-size:11px;
+}
+
+.balance-orders b{
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+}
+
+.balance-orders b small{
+  font-size:9px;
+  font-weight:500;
+  color:#dceaff;
+}
 .pay em{
   font-style:normal;
   font-size:9px;
