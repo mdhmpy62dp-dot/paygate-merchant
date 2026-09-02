@@ -288,11 +288,68 @@ function Chart(){
 }
 
 function Orders({openOrder}){
- return <section className="card orders"><div className="section-head"><h2>最新订单</h2><button className="link" onClick={()=>openOrder(orders[0])}>全部订单 ›</button></div>
-   {orders.map(o=><button className="order-row" key={o.id} onClick={()=>openOrder(o)}>
-    <span className={'pay-dot '+o.tone}>{o.method==='微信支付'?'微':o.method==='支付宝'?'支':o.method==='银行卡'?'▤':'₮'}</span>
-    <span className="order-no">{o.id}</span><strong>{o.amount} <small>{o.currency}</small></strong><span>{o.method}</span><em className={o.status==='已支付'?'paid':o.status==='处理中'?'processing':'cancelled'}>{o.status}</em>
-   </button>)}
+ return <section className="card orders">
+
+   <div className="section-head">
+     <h2>最新订单</h2>
+     <button
+       className="link"
+       onClick={()=>openOrder(orders[0])}
+     >
+       全部订单 ›
+     </button>
+   </div>
+
+   <div className="home-order-list">
+
+     {orders.slice(0,4).map(o=>
+       <button
+         className="home-order"
+         key={o.id}
+         onClick={()=>openOrder(o)}
+       >
+
+         <span className={'home-order-icon '+o.tone}>
+           {o.method==='微信支付'
+             ?'微'
+             :o.method==='支付宝'
+             ?'支'
+             :o.method==='银行卡'
+             ?'▤'
+             :'₮'}
+         </span>
+
+         <span className="home-order-main">
+
+           <strong>{o.id}</strong>
+
+           <small>
+             {o.method} · {o.time || '09-02 10:30'}
+           </small>
+
+         </span>
+
+         <span className="home-order-right">
+
+           <b>+{o.amount}</b>
+
+           <em className={
+             o.status==='已支付'
+               ?'paid'
+               :o.status==='处理中'
+               ?'processing'
+               :'cancelled'
+           }>
+             {o.status}
+           </em>
+
+         </span>
+
+       </button>
+     )}
+
+   </div>
+
  </section>
 }
 
