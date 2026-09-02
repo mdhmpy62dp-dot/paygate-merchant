@@ -16,7 +16,7 @@ function Header({toast}){
  return <header className="header">
    <div className="brand-row"><div className="brand">PayGate</div><div className="header-actions">
      <button className="header-btn" onClick={()=>toast('暂无新通知')}>♧<i/></button>
-     <button className="header-btn" onClick={()=>toast('扫码功能')}</button>
+     <button className="header-btn" onClick={()=>toast('扫码功能')}>⌕</button>
    </div></div>
    <div className="merchant-row"><span>商户 A</span><span className="verified">✓</span><button className="switch" onClick={()=>toast('商户切换')}>⌄</button></div>
  </header>
