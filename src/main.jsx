@@ -110,9 +110,9 @@ function Payments({toast}) {
      />
 
      <Pay
-       icon="▤"
+       icon="▣"
        tone="bank"
-       name="银行卡"
+       name="银行卡"。  
        desc="银行卡转账"
        toast={toast}
      />
