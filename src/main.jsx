@@ -296,11 +296,70 @@ function Orders({openOrder}){
  </section>
 }
 
-function Quick({toast}){return <section className="quick-grid">
- {[
-  ['create','▤','创建订单','快速创建收款订单'],['qr','▦','收款二维码','展示收款二维码'],['link','↗','支付链接','分享收款链接'],['withdraw','▤','资金提现','提取到银行卡/钱包']
- ].map(x=><button className="quick" key={x[2]} onClick={()=>toast(x[2])}><span className={'quick-icon '+x[0]}>{x[1]}</span><strong>{x[2]}</strong><small>{x[3]}</small></button>)}
- </section>}
+function Quick({toast}){
+
+ const actions=[
+   {
+     tone:'create',
+     icon:'＋',
+     title:'创建订单',
+     desc:'快速创建收款订单',
+     message:'创建订单'
+   },
+   {
+     tone:'qr',
+     icon:'▦',
+     title:'收款二维码',
+     desc:'展示专属收款码',
+     message:'收款二维码'
+   },
+   {
+     tone:'link',
+     icon:'↗',
+     title:'支付链接',
+     desc:'生成支付链接',
+     message:'支付链接'
+   },
+   {
+     tone:'withdraw',
+     icon:'↙',
+     title:'资金提现',
+     desc:'提现到银行卡/钱包',
+     message:'资金提现'
+   }
+ ]
+
+ return <section className="card quick-card">
+
+   <div className="section-head">
+     <h2>快捷操作</h2>
+     <span className="quick-hint">常用功能</span>
+   </div>
+
+   <div className="quick-grid">
+
+     {actions.map(x=>
+       <button
+         className="quick"
+         key={x.title}
+         onClick={()=>toast(x.message)}
+       >
+
+         <span className={'quick-icon '+x.tone}>
+           {x.icon}
+         </span>
+
+         <strong>{x.title}</strong>
+
+         <small>{x.desc}</small>
+
+       </button>
+     )}
+
+   </div>
+
+ </section>
+}
 
 function OrderDetail({order,back}){
  return <div className="subpage"><div className="sub-head"><button onClick={back}>‹</button><h1>订单详情</h1></div>
