@@ -205,7 +205,7 @@ function App(){
  const nav=(t)=>{setDetail(null);setTab(t);window.scrollTo({top:0,behavior:'smooth'})}
  if(detail) return <div className="app"><OrderDetail order={detail} back={()=>setDetail(null)}/>{toastMsg&&<div className="toast">{toastMsg}</div>}</div>
  const page = tab==='home'?<><Header toast={toast}/><main><Balance hidden={hidden} setHidden={setHidden}/><Payments toast={toast}/><Chart/><Orders openOrder={setDetail}/><Quick toast={toast}/></main></>:
-  tab==='orders'?<><Header toast={toast}/><main><Placeholder title="订单" desc="订单列表、搜索、状态筛选和订单详情将在这里管理。"><button/></Placeholder></main></>:
+  tab==='orders'?<><Header toast={toast}/><main><OrdersPage openOrder={setDetail}/></main></>:
   tab==='wallet'?<><Header toast={toast}/><main><Placeholder title="钱包" desc="余额、充值、提现、资金流水。"/></main></>:
   tab==='settlement'?<><Header toast={toast}/><main><Placeholder title="结算" desc="待结算、自动结算和历史结算。"/></main></>:
   <><Header toast={toast}/><main><Placeholder title="我的" desc="商户资料、安全设置、收款方式和 API 管理。"/></main></>
