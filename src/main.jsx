@@ -24,16 +24,57 @@ function Header({toast}){
 
 function Balance({hidden,setHidden}){
  return <section className="balance-card">
-   <div className="balance-head"><span>总资产（USDT）</span><button onClick={()=>setHidden(!hidden)}>{hidden?'○':'◉'}</button></div>
-   <div className="balance-value">{hidden?'••••••':'10,245.32'}</div>
-   <div className="balance-usd">≈ $10,245.32</div>
-   <div className="balance-divider"/>
-   <div className="balance-stats">
-    {[
-      ['可用余额','8,245.32','≈ $8,245.32'],['待结算','1,500.00','≈ $1,500.00'],
-      ['今日收入','2,345.21','≈ $2,345.21'],['今日订单','152','笔']
-    ].map((x,i)=><div key={i}><span>{x[0]}</span><b>{x[1]}</b><small>{x[2]}</small></div>)}
+
+   <div className="balance-head">
+     <span>总资产（USDT）</span>
+     <button onClick={()=>setHidden(!hidden)}>
+       {hidden?'○':'◉'}
+     </button>
    </div>
+
+   <div className="balance-value">
+     {hidden?'••••••':'10,245.32'}
+   </div>
+
+   <div className="balance-usd">
+     ≈ $10,245.32
+   </div>
+
+   <div className="balance-divider"/>
+
+   <div className="balance-stats">
+
+     <div>
+       <span>可用余额</span>
+       <b>{hidden?'••••':'8,245.32'}</b>
+       <small>可用于收款</small>
+     </div>
+
+     <div>
+       <span>待结算</span>
+       <b>{hidden?'••••':'1,500.00'}</b>
+       <small>结算中</small>
+     </div>
+
+     <div>
+       <span>冻结金额</span>
+       <b>{hidden?'••••':'500.00'}</b>
+       <small>暂不可用</small>
+     </div>
+
+     <div>
+       <span>今日收入</span>
+       <b>{hidden?'••••':'2,345.21'}</b>
+       <small>今日累计</small>
+     </div>
+
+   </div>
+
+   <div className="balance-orders">
+     <span>今日订单</span>
+     <b>{hidden?'••••':'152'} <small>笔</small></b>
+   </div>
+
  </section>
 }
 
