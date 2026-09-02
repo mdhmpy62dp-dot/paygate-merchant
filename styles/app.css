@@ -948,3 +948,57 @@
   }
 
 }
+/* ===== 首页最新订单 V2 ===== */
+
+.orders-subtitle{
+  display:block;
+  margin-top:4px;
+  color:#929cac;
+  font-size:9px;
+}
+
+.home-order-summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin:3px 0 7px;
+}
+
+.home-order-summary>div{
+  padding:8px 9px;
+  border-radius:10px;
+  background:#f7f9fc;
+}
+
+.home-order-summary span{
+  display:block;
+  color:#8d99aa;
+  font-size:8px;
+  margin-bottom:4px;
+}
+
+.home-order-summary b{
+  display:block;
+  color:#26334a;
+  font-size:13px;
+}
+
+.home-order-list{
+  border-top:1px solid #eef1f5;
+}
+
+.home-order-list .order-row{
+  min-height:52px;
+}
+
+@media(max-width:360px){
+
+  .home-order-summary{
+    gap:5px;
+  }
+
+  .home-order-summary>div{
+    padding:7px 6px;
+  }
+
+}
