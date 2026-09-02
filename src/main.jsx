@@ -14,11 +14,58 @@ function Icon({children,className=''}){return <span className={'icon '+className
 
 function Header({toast}){
  return <header className="header">
-   <div className="brand-row"><div className="brand">PayGate</div><div className="header-actions">
-     <button className="header-btn" onClick={()=>toast('暂无新通知')}>♧<i/></button>
-     <button className="header-btn" onClick={()=>toast('扫码功能')}>⌕</button>
-   </div></div>
-   <div className="merchant-row"><span>商户 A</span><span className="verified">✓</span><button className="switch" onClick={()=>toast('商户切换')}>⌄</button></div>
+
+   <div className="brand-row">
+
+     <div className="brand-area">
+       <div className="brand">PayGate</div>
+       <span className="brand-badge">商户中心</span>
+     </div>
+
+     <div className="header-actions">
+
+       <button
+         className="header-btn"
+         onClick={()=>toast('暂无新通知')}
+         aria-label="通知"
+       >
+         ♧
+         <i/>
+       </button>
+
+       <button
+         className="header-btn"
+         onClick={()=>toast('扫码功能')}
+         aria-label="扫码"
+       >
+         ⌕
+       </button>
+
+     </div>
+
+   </div>
+
+   <div className="merchant-row">
+
+     <span className="merchant-avatar">A</span>
+
+     <div className="merchant-info">
+       <strong>商户 A</strong>
+       <small>已认证商户</small>
+     </div>
+
+     <span className="verified">✓</span>
+
+     <button
+       className="switch"
+       onClick={()=>toast('商户切换')}
+       aria-label="切换商户"
+     >
+       ⌄
+     </button>
+
+   </div>
+
  </header>
 }
 
