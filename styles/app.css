@@ -877,3 +877,51 @@
     font-size:11px;
   }
 }
+/* ===== 收入趋势 V2 ===== */
+
+.chart-card{
+  overflow:hidden;
+}
+
+.chart-subtitle{
+  display:block;
+  margin-top:4px;
+  color:#929cac;
+  font-size:9px;
+}
+
+.chart-total{
+  display:flex;
+  align-items:baseline;
+  gap:5px;
+  margin:2px 0 8px 42px;
+}
+
+.chart-total strong{
+  color:#18243a;
+  font-size:21px;
+  font-weight:750;
+}
+
+.chart-total span{
+  color:#8994a5;
+  font-size:9px;
+}
+
+.chart-total em{
+  margin-left:5px;
+  padding:3px 6px;
+  border-radius:6px;
+  background:#eaf9f1;
+  color:#1b9d5c;
+  font-size:8px;
+  font-style:normal;
+}
+
+@media(max-width:360px){
+
+  .chart-total strong{
+    font-size:19px;
+  }
+
+}
