@@ -84,6 +84,117 @@ function OrderDetail({order,back}){
  </div>
 }
 
+function OrdersPage({openOrder}){
+  const [filter,setFilter]=useState('全部')
+  const [keyword,setKeyword]=useState('')
+
+  const filters=['全部','已支付','处理中','已取消']
+
+  const list=orders.filter(o=>{
+    const matchStatus=filter==='全部'||o.status===filter
+    const matchKeyword=
+      !keyword ||
+      o.id.toLowerCase().includes(keyword.toLowerCase()) ||
+      o.method.includes(keyword)
+    return matchStatus&&matchKeyword
+  })
+
+  return (
+    <div className="subpage orders-page">
+      <div className="sub-head">
+        <button onClick={()=>window.scrollTo({top:0})}>‹</button>
+        <h1>订单</h1>
+      </div>
+
+      <div className="order-summary">
+        <div>
+          <span>今日订单</span>
+          <b>152</b>
+        </div>
+        <div>
+          <span>今日收款</span>
+          <b>2,345.21</b>
+        </div>
+        <div>
+          <span>成功率</span>
+          <b>98.6%</b>
+        </div>
+      </div>
+
+      <div className="order-search">
+        <span>⌕</span>
+        <input
+          value={keyword}
+          onChange={e=>setKeyword(e.target.value)}
+          placeholder="搜索订单号或支付方式"
+        />
+      </div>
+
+      <div className="order-filters">
+        {filters.map(x=>(
+          <button
+            key={x}
+            className={filter===x?'selected':''}
+            onClick={()=>setFilter(x)}
+          >
+            {x}
+          </button>
+        ))}
+      </div>
+
+      <section className="card order-list-card">
+        <div className="list-title">
+          <h2>订单列表</h2>
+          <span>{list.length} 笔</span>
+        </div>
+
+        {list.map(o=>(
+          <button
+            className="full-order"
+            key={o.id}
+            onClick={()=>openOrder(o)}
+          >
+            <div className={'pay-dot '+o.tone}>
+              {o.method==='微信支付'
+                ?'微'
+                :o.method==='支付宝'
+                ?'支'
+                :o.method==='银行卡'
+                ?'▤'
+                :'₮'}
+            </div>
+
+            <div className="full-order-main">
+              <strong>{o.id}</strong>
+              <span>{o.method} · 2026-05-13 10:30</span>
+            </div>
+
+            <div className="full-order-right">
+              <b>{o.amount} <small>{o.currency}</small></b>
+              <em className={
+                o.status==='已支付'
+                ?'paid'
+                :o.status==='处理中'
+                ?'processing'
+                :'cancelled'
+              }>
+                {o.status}
+              </em>
+            </div>
+          </button>
+        ))}
+
+        {list.length===0 && (
+          <div className="empty-orders">
+            <div>⌕</div>
+            <b>没有找到订单</b>
+            <span>请修改搜索条件或状态筛选</span>
+          </div>
+        )}
+      </section>
+    </div>
+  )
+}
 function Placeholder({title,desc,back}){
  return <div className="subpage"><div className="sub-head"><button onClick={back}>‹</button><h1>{title}</h1></div><section className="card placeholder"><Icon className="placeholder-icon">◈</Icon><h2>{title}</h2><p>{desc}</p><button className="primary">继续建设</button></section></div>
 }
