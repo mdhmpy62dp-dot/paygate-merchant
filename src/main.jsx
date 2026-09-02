@@ -152,6 +152,132 @@ function Pay({icon,tone,name,desc,toast}){
 }
 
 function Chart(){
+
+ const data=[
+   ['05-07','1,820'],
+   ['05-08','2,460'],
+   ['05-09','3,180'],
+   ['05-10','2,520'],
+   ['05-11','3,620'],
+   ['05-12','2,980'],
+   ['05-13','4,120']
+ ]
+
+ return <section className="card chart-card">
+
+   <div className="section-head">
+     <div>
+       <h2>收入趋势</h2>
+       <small className="chart-subtitle">近7天收款金额</small>
+     </div>
+
+     <button
+       className="period"
+       onClick={()=>alert('时间范围选择')}
+     >
+       近7天⌄
+     </button>
+   </div>
+
+   <div className="chart-total">
+     <strong>20,700.00</strong>
+     <span>USDT</span>
+     <em>↑ 12.6%</em>
+   </div>
+
+   <div className="chart-wrap">
+
+     <div className="y-axis">
+       <span>4,000</span>
+       <span>3,000</span>
+       <span>2,000</span>
+       <span>1,000</span>
+       <span>0</span>
+     </div>
+
+     <div className="chart">
+
+       <div className="grid">
+         {[1,2,3,4,5].map(i=>
+           <i key={i}/>
+         )}
+       </div>
+
+       <svg
+         viewBox="0 0 700 220"
+         preserveAspectRatio="none"
+       >
+
+         <defs>
+           <linearGradient
+             id="fill"
+             x1="0"
+             y1="0"
+             x2="0"
+             y2="1"
+           >
+             <stop
+               offset="0"
+               stopColor="#2879f5"
+               stopOpacity=".22"
+             />
+
+             <stop
+               offset="1"
+               stopColor="#2879f5"
+               stopOpacity=".02"
+             />
+           </linearGradient>
+         </defs>
+
+         <path
+           d="M15 188L126 145L237 94L348 136L459 62L570 112L685 28L685 205L15 205Z"
+           fill="url(#fill)"
+         />
+
+         <polyline
+           points="15,188 126,145 237,94 348,136 459,62 570,112 685,28"
+           fill="none"
+           stroke="#2879f5"
+           strokeWidth="4"
+           strokeLinecap="round"
+           strokeLinejoin="round"
+         />
+
+         {[
+           ['15','188'],
+           ['126','145'],
+           ['237','94'],
+           ['348','136'],
+           ['459','62'],
+           ['570','112'],
+           ['685','28']
+         ].map(([cx,cy])=>
+           <circle
+             key={cx}
+             cx={cx}
+             cy={cy}
+             r="5"
+             fill="#fff"
+             stroke="#2879f5"
+             strokeWidth="3"
+           />
+         )}
+
+       </svg>
+
+     </div>
+
+   </div>
+
+   <div className="dates">
+     {data.map(x=>
+       <span key={x[0]}>{x[0]}</span>
+     )}
+   </div>
+
+ </section>
+}
  const [period,setPeriod]=useState('7天')
 
  const data={
