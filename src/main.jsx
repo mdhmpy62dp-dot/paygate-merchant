@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {createRoot} from 'react-dom/client'
-import './styles/app.css'
+import '../styles/app.css'
 
 const orders=[
  {id:'ORD202405130001',amount:'100.00',currency:'USDT',method:'微信支付',status:'已支付',tone:'green'},
