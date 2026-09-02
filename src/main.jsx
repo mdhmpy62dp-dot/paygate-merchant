@@ -195,6 +195,139 @@ function OrdersPage({openOrder}){
     </div>
   )
 }
+function WalletPage({toast}){
+  const [showAll,setShowAll]=useState(false)
+
+  const records=[
+    {type:'充值',title:'账户充值',desc:'银行卡入账',amount:'+1,000.00',time:'09-02 10:42',tone:'blue'},
+    {type:'收款',title:'微信收款',desc:'订单 ORD202609020001',amount:'+100.00',time:'09-02 10:30',tone:'green'},
+    {type:'收款',title:'支付宝收款',desc:'订单 ORD202609020002',amount:'+50.00',time:'09-02 10:26',tone:'blue'},
+    {type:'提现',title:'提现到银行卡',desc:'尾号 8821',amount:'-500.00',time:'09-02 09:18',tone:'orange'}
+  ]
+
+  return (
+    <div className="subpage wallet-page">
+
+      <div className="sub-head">
+        <button onClick={()=>toast('返回首页')}>‹</button>
+        <h1>钱包</h1>
+      </div>
+
+      <section className="wallet-balance">
+        <div className="wallet-balance-top">
+          <span>可用余额</span>
+          <button onClick={()=>toast('余额已刷新')}>↻</button>
+        </div>
+
+        <strong>¥12,680.50</strong>
+
+        <div className="wallet-balance-bottom">
+          <span>总资产 ¥13,280.50</span>
+          <span>冻结 ¥600.00</span>
+        </div>
+      </section>
+
+      <div className="wallet-actions">
+
+        <button onClick={()=>toast('充值功能')}>
+          <span className="wallet-action-icon recharge">＋</span>
+          <b>充值</b>
+          <small>资金入账</small>
+        </button>
+
+        <button onClick={()=>toast('提现功能')}>
+          <span className="wallet-action-icon withdraw">↗</span>
+          <b>提现</b>
+          <small>转到银行卡</small>
+        </button>
+
+        <button onClick={()=>toast('资金流水')}>
+          <span className="wallet-action-icon flow">↕</span>
+          <b>资金流水</b>
+          <small>查看明细</small>
+        </button>
+
+      </div>
+
+      <section className="card wallet-info-card">
+
+        <div className="section-head">
+          <h2>资金概览</h2>
+        </div>
+
+        <div className="wallet-info-grid">
+
+          <div>
+            <span>今日收入</span>
+            <b>¥2,345.21</b>
+          </div>
+
+          <div>
+            <span>今日支出</span>
+            <b>¥500.00</b>
+          </div>
+
+          <div>
+            <span>待结算</span>
+            <b>¥860.40</b>
+          </div>
+
+          <div>
+            <span>累计收入</span>
+            <b>¥86,520.80</b>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section className="card wallet-record-card">
+
+        <div className="section-head">
+          <h2>最近流水</h2>
+
+          <button
+            className="link"
+            onClick={()=>setShowAll(!showAll)}
+          >
+            {showAll?'收起':'全部'}
+          </button>
+        </div>
+
+        {(showAll?records:records.slice(0,3)).map((r,i)=>(
+          <div className="wallet-record" key={i}>
+
+            <div className={'wallet-record-icon '+r.tone}>
+              {r.type==='充值'?'＋':r.type==='提现'?'↗':'¥'}
+            </div>
+
+            <div className="wallet-record-main">
+              <strong>{r.title}</strong>
+              <span>{r.desc}</span>
+              <small>{r.time}</small>
+            </div>
+
+            <b className={r.amount.startsWith('+')?'income':'expense'}>
+              {r.amount}
+            </b>
+
+          </div>
+        ))}
+
+      </section>
+
+      <div className="wallet-tip">
+        <span>✓</span>
+
+        <div>
+          <b>资金安全提示</b>
+          <small>所有资金操作均需要完成商户安全验证</small>
+        </div>
+      </div>
+
+    </div>
+  )
+}
 function Placeholder({title,desc,back}){
  return <div className="subpage"><div className="sub-head"><button onClick={back}>‹</button><h1>{title}</h1></div><section className="card placeholder"><Icon className="placeholder-icon">◈</Icon><h2>{title}</h2><p>{desc}</p><button className="primary">继续建设</button></section></div>
 }
